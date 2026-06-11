@@ -367,6 +367,12 @@
       cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; white-space: nowrap;
     }
     .qr:hover { background: var(--sage-light); }
+    .md-li {
+      display: block; padding-left: 1rem; position: relative; margin: 0.2rem 0;
+    }
+    .md-li::before { content: '·'; position: absolute; left: 0; color: var(--sage); font-weight: 700; }
+    .bubble strong { font-weight: 500; }
+
     .chat-foot {
       padding: 0.85rem 1.2rem; border-top: 1px solid var(--border);
       display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;
@@ -888,7 +894,12 @@ function appendTyping() {
   msgsEl.appendChild(d); msgsEl.scrollTop = msgsEl.scrollHeight; return d;
 }
 function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  return s
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<span class="md-li">$1</span>')
+    .replace(/\n/g,'<br>');
 }
 </script>
 </body>
