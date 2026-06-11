@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow Studio London — Yoga & Pilates in Shoreditch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:              #FAF9F6;
+      --bg-alt:          #F3F1EB;
+      --bg-dark:         #252523;
+      --text:            #252523;
+      --text-mid:        #555550;
+      --text-muted:      #999890;
+      --sage:            #7A9E7E;
+      --sage-light:      #E5EDE6;
+      --sage-dark:       #4E7254;
+      --terra:           #C4704F;
+      --terra-light:     #F5E8E1;
+      --terra-dark:      #A55A3C;
+      --border:          #E6E3DB;
+      --shadow:          0 8px 40px rgba(37,37,35,0.08);
+      --r:               14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      line-height: 1.12;
+    }
+
+    /* ── Nav ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3.5rem;
+      background: rgba(250,249,246,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--sage); }
+
+    .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-mid); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sage-dark); }
+
+    .nav-cta {
+      background: var(--terra) !important; color: white !important;
+      padding: 0.5rem 1.2rem; border-radius: 100px; transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--terra-dark) !important; }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 3.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-deco {
+      position: absolute; right: -5vw; top: 50%;
+      transform: translateY(-50%);
+      width: 56vw; height: 56vw; max-width: 780px; max-height: 780px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%,
+        rgba(122,158,126,0.13) 0%,
+        rgba(122,158,126,0.04) 55%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-deco-ring {
+      position: absolute; right: 4vw; top: 50%;
+      transform: translateY(-50%);
+      width: 38vw; height: 38vw; max-width: 520px; max-height: 520px;
+      border-radius: 50%;
+      border: 1px solid rgba(122,158,126,0.18);
+      pointer-events: none;
+    }
+
+    .hero-deco-ring2 {
+      position: absolute; right: 10vw; top: 50%;
+      transform: translateY(-50%);
+      width: 22vw; height: 22vw; max-width: 300px; max-height: 300px;
+      border-radius: 50%;
+      border: 1px solid rgba(122,158,126,0.28);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.73rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--sage-dark); margin-bottom: 1.6rem;
+    }
+    .eyebrow::before {
+      content: ''; display: block; width: 24px; height: 1px; background: var(--sage);
+    }
+
+    .hero h1 {
+      font-size: clamp(3.8rem, 6.5vw, 6rem);
+      font-weight: 300; letter-spacing: -0.01em;
+      margin-bottom: 1.6rem; color: var(--text);
+    }
+    .hero h1 em { font-style: italic; color: var(--sage-dark); }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text-mid); font-weight: 300;
+      line-height: 1.75; max-width: 420px; margin-bottom: 2.75rem;
+    }
+
+    .hero-actions { display: flex; gap: 0.875rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.85rem 1.75rem; border-radius: 100px;
+      font-size: 0.85rem; font-family: 'DM Sans', sans-serif;
+      font-weight: 400; letter-spacing: 0.02em;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--terra); color: white; }
+    .btn-primary:hover { background: var(--terra-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(196,112,79,0.3); }
+    .btn-outline { background: transparent; color: var(--sage-dark); border: 1.5px solid var(--sage); }
+    .btn-outline:hover { background: var(--sage-light); }
+
+    .hero-stats {
+      grid-column: 1 / -1;
+      display: flex; gap: 3.5rem;
+      padding-top: 4.5rem; margin-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 300; line-height: 1;
+      color: var(--text);
+    }
+    .stat-label {
+      font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--text-muted); margin-top: 0.3rem;
+    }
+
+    /* ── Classes ───────────────────────────────────────────── */
+    .section { padding: 6.5rem 3.5rem; }
+    .section-alt { background: var(--bg-alt); }
+
+    .section-top {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 3.5rem; gap: 1.5rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--terra); margin-bottom: 0.6rem;
+    }
+
+    .section h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; color: var(--text);
+    }
+
+    .classes-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+    }
+
+    .class-card {
+      background: white; border-radius: var(--r);
+      padding: 2rem 1.75rem; border: 1px solid var(--border);
+      cursor: pointer; transition: all 0.25s;
+    }
+    .class-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: rgba(122,158,126,0.5);
+    }
+
+    .class-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300;
+      color: var(--sage-light); line-height: 1; margin-bottom: 1.25rem;
+    }
+
+    .class-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 400; margin-bottom: 0.6rem;
+    }
+
+    .class-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; }
+
+    .class-pill {
+      display: inline-block; margin-top: 1.25rem;
+      font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border-radius: 100px;
+      background: var(--sage-light); color: var(--sage-dark);
+    }
+
+    /* ── Pricing ───────────────────────────────────────────── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; max-width: 860px;
+    }
+
+    .price-card {
+      background: white; border-radius: var(--r);
+      padding: 2.25rem 2rem; border: 1px solid var(--border);
+      position: relative; transition: box-shadow 0.2s;
+    }
+    .price-card:hover { box-shadow: var(--shadow); }
+    .price-card.featured { border-color: var(--sage); background: var(--sage-light); }
+
+    .price-badge {
+      position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: var(--terra); color: white;
+      font-size: 0.67rem; letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 0.28rem 0.85rem; border-radius: 100px; white-space: nowrap;
+    }
+
+    .price-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 500; margin-bottom: 0.25rem;
+    }
+
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem; font-weight: 300; line-height: 1; margin: 0.875rem 0 0.35rem;
+    }
+    .price-amount sup { font-size: 1.3rem; vertical-align: super; }
+
+    .price-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.1rem; }
+    .price-desc { font-size: 0.84rem; color: var(--text-mid); line-height: 1.65; }
+
+    /* ── Hours banner ──────────────────────────────────────── */
+    .hours {
+      background: var(--bg-dark); color: white;
+      padding: 3.5rem 3.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+
+    .hours-label {
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.35rem;
+    }
+
+    .hours h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem; font-weight: 300; margin-bottom: 0.4rem;
+    }
+
+    .hours p { font-size: 0.84rem; color: rgba(255,255,255,0.5); }
+
+    .hours-times { display: flex; gap: 3rem; flex-wrap: wrap; }
+
+    .hours-item-label {
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.3rem;
+    }
+    .hours-item-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 300;
+    }
+
+    .btn-ghost {
+      background: transparent; color: white;
+      border: 1.5px solid rgba(255,255,255,0.25); padding: 0.8rem 1.5rem;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    footer {
+      padding: 2.25rem 3.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 500; letter-spacing: 0.06em;
+    }
+    .footer-logo span { color: var(--sage); }
+
+    footer p { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── Chat toggle ───────────────────────────────────────── */
+    #chatToggle {
+      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 1000;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--sage-dark); color: white; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(78,114,84,0.38); transition: all 0.25s;
+    }
+    #chatToggle:hover { background: var(--sage); transform: scale(1.06); }
+    #chatToggle .ic-close { display: none; }
+    #chatToggle.open .ic-chat { display: none; }
+    #chatToggle.open .ic-close { display: block; }
+
+    /* ── Chat widget ───────────────────────────────────────── */
+    #chatWidget {
+      position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 999;
+      width: 368px;
+      background: white; border-radius: 18px;
+      box-shadow: 0 20px 70px rgba(37,37,35,0.16);
+      display: flex; flex-direction: column; overflow: hidden;
+      max-height: 570px;
+      transform: scale(0.92) translateY(16px); opacity: 0; pointer-events: none;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #chatWidget.open {
+      transform: scale(1) translateY(0); opacity: 1; pointer-events: all;
+    }
+
+    .chat-head {
+      background: var(--sage-dark); color: white;
+      padding: 1rem 1.2rem;
+      display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;
+    }
+
+    .chat-avatar {
+      width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;
+    }
+
+    .chat-head-title { font-size: 0.88rem; font-weight: 500; }
+    .chat-head-sub { font-size: 0.7rem; opacity: 0.72; display: flex; align-items: center; gap: 0.3rem; margin-top: 0.1rem; }
+
+    .dot-live {
+      width: 6px; height: 6px; border-radius: 50%; background: #6EE7B7; flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; } 50% { opacity: 0.5; }
+    }
+
+    #chatMsgs {
+      flex: 1; overflow-y: auto; padding: 1.2rem;
+      display: flex; flex-direction: column; gap: 0.7rem;
+      scroll-behavior: smooth;
+    }
+    #chatMsgs::-webkit-scrollbar { width: 3px; }
+    #chatMsgs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .msg { display: flex; flex-direction: column; max-width: 86%; }
+    .msg.user { align-self: flex-end; align-items: flex-end; }
+    .msg.bot  { align-self: flex-start; align-items: flex-start; }
+
+    .bubble {
+      padding: 0.68rem 0.95rem; border-radius: 16px;
+      font-size: 0.865rem; line-height: 1.58;
+    }
+    .msg.user .bubble {
+      background: var(--sage-dark); color: white; border-bottom-right-radius: 4px;
+    }
+    .msg.bot .bubble {
+      background: var(--bg-alt); color: var(--text); border-bottom-left-radius: 4px;
+    }
+
+    .typing {
+      display: flex; align-items: center; gap: 4px;
+      padding: 0.68rem 0.95rem;
+      background: var(--bg-alt); border-radius: 16px; border-bottom-left-radius: 4px;
+      width: fit-content; align-self: flex-start;
+    }
+    .t-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted);
+      animation: tdot 1.2s ease-in-out infinite;
+    }
+    .t-dot:nth-child(2) { animation-delay: 0.2s; }
+    .t-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes tdot {
+      0%,60%,100% { transform: translateY(0); opacity: 0.35; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    #quickReplies {
+      padding: 0.5rem 1.2rem 0.6rem;
+      display: flex; flex-wrap: wrap; gap: 0.45rem;
+    }
+
+    .qr {
+      font-size: 0.77rem; padding: 0.38rem 0.85rem; border-radius: 100px;
+      border: 1.5px solid var(--sage); background: transparent; color: var(--sage-dark);
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .qr:hover { background: var(--sage-light); }
+
+    .chat-foot {
+      padding: 0.85rem 1.2rem; border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0;
+    }
+
+    #chatInput {
+      flex: 1; border: none; outline: none; background: transparent;
+      font-size: 0.875rem; font-family: 'DM Sans', sans-serif; color: var(--text);
+    }
+    #chatInput::placeholder { color: var(--text-muted); }
+
+    #chatSend {
+      width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer;
+      background: var(--sage-dark); color: white; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    #chatSend:hover:not(:disabled) { background: var(--sage); }
+    #chatSend:disabled { background: var(--border); cursor: not-allowed; }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+      .hero-deco, .hero-deco-ring, .hero-deco-ring2 { display: none; }
+      .hero-stats { gap: 2rem; padding-top: 3rem; }
+
+      .section { padding: 4.5rem 1.5rem; }
+      .section-top { flex-direction: column; align-items: flex-start; }
+
+      .classes-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+
+      .hours { padding: 2.5rem 1.5rem; flex-direction: column; gap: 1.75rem; }
+
+      footer { padding: 1.75rem 1.5rem; flex-direction: column; text-align: center; }
+
+      #chatWidget { width: calc(100vw - 2rem); right: 1rem; bottom: 4.75rem; max-height: 72vh; }
+      #chatToggle { right: 1rem; bottom: 1rem; }
+    }
+
+    @media (max-width: 560px) {
+      .classes-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#">Flow<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#hours">Find Us</a></li>
+    <li><a class="nav-cta" href="#">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-deco"></div>
+  <div class="hero-deco-ring"></div>
+  <div class="hero-deco-ring2"></div>
+
+  <div class="hero-content">
+    <p class="eyebrow">Shoreditch, East London</p>
+    <h1>Find Your<br><em>Flow</em></h1>
+    <p class="hero-sub">
+      Premium yoga and pilates in the heart of East London.
+      Every class, every body, every level — you're welcome here.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#">Book a Class</a>
+      <a class="btn btn-outline" href="#classes">Explore Classes</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">Disciplines</div>
+    </div>
+    <div>
+      <div class="stat-num">£18</div>
+      <div class="stat-label">Drop-in from</div>
+    </div>
+    <div>
+      <div class="stat-num">£30</div>
+      <div class="stat-label">Intro — 2 wks unlimited</div>
+    </div>
+    <div>
+      <div class="stat-num">7</div>
+      <div class="stat-label">Days a week</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Classes ──────────────────────────────────────────────── -->
+<section class="section section-alt" id="classes">
+  <div class="section-top">
+    <div>
+      <p class="section-eyebrow">What we offer</p>
+      <h2>Our Classes</h2>
+    </div>
+    <a class="btn btn-outline" href="#">View Full Timetable →</a>
+  </div>
+  <div class="classes-grid">
+    <div class="class-card">
+      <div class="class-num">01</div>
+      <h3 class="class-name">Vinyasa Yoga</h3>
+      <p class="class-desc">Dynamic, breath-led movement flowing through creative sequences. Build strength, flexibility and full presence in your body.</p>
+      <span class="class-pill">All levels</span>
+    </div>
+    <div class="class-card">
+      <div class="class-num">02</div>
+      <h3 class="class-name">Reformer Pilates</h3>
+      <p class="class-desc">Equipment-based pilates on the reformer machine. Deep core strength, improved posture and controlled, mindful movement.</p>
+      <span class="class-pill">All levels</span>
+    </div>
+    <div class="class-card">
+      <div class="class-num">03</div>
+      <h3 class="class-name">Yin Yoga</h3>
+      <p class="class-desc">A slow, meditative practice holding poses for 3–5 minutes. Deep release through connective tissue and a quieter mind.</p>
+      <span class="class-pill">Beginners welcome</span>
+    </div>
+    <div class="class-card">
+      <div class="class-num">04</div>
+      <h3 class="class-name">Meditation</h3>
+      <p class="class-desc">Guided mindfulness and breathwork to reduce stress and find stillness. A rare and necessary pause in a busy city life.</p>
+      <span class="class-pill">All levels</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ──────────────────────────────────────────────── -->
+<section class="section" id="pricing">
+  <div class="section-top">
+    <div>
+      <p class="section-eyebrow">Memberships & classes</p>
+      <h2>Simple Pricing</h2>
+    </div>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <p class="price-title">Drop-In</p>
+      <div class="price-amount"><sup>£</sup>18</div>
+      <p class="price-note">per class</p>
+      <p class="price-desc">Book any single class with no commitment. Perfect for trying us out or topping up around a membership.</p>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Best for new students</div>
+      <p class="price-title">Intro Offer</p>
+      <div class="price-amount"><sup>£</sup>30</div>
+      <p class="price-note">2 weeks unlimited</p>
+      <p class="price-desc">New to Flow Studio? Enjoy 14 days of unlimited classes across all disciplines at our special welcome price.</p>
+    </div>
+    <div class="price-card">
+      <p class="price-title">Monthly Unlimited</p>
+      <div class="price-amount"><sup>£</sup>95</div>
+      <p class="price-note">per month, rolling</p>
+      <p class="price-desc">Unlimited access to every class, every week. The best value for a committed regular practice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Hours ────────────────────────────────────────────────── -->
+<div class="hours" id="hours">
+  <div>
+    <p class="hours-label">Opening hours</p>
+    <h3>We're open every day</h3>
+    <p>Redchurch Street, Shoreditch, London E2</p>
+  </div>
+  <div class="hours-times">
+    <div>
+      <p class="hours-item-label">Mon – Fri</p>
+      <p class="hours-item-val">6 am – 9 pm</p>
+    </div>
+    <div>
+      <p class="hours-item-label">Sat – Sun</p>
+      <p class="hours-item-val">8 am – 6 pm</p>
+    </div>
+  </div>
+  <a class="btn btn-ghost" href="#">Book a Class →</a>
+</div>
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">Flow<span>.</span></div>
+  <p>© 2025 Flow Studio London · Shoreditch · hello@flowstudiolondon.com</p>
+  <p style="color: var(--sage);">Made with intention ✦</p>
+</footer>
+
+<!-- ── Chat toggle ──────────────────────────────────────────── -->
+<button id="chatToggle" aria-label="Chat with us">
+  <svg class="ic-chat" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <svg class="ic-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+</button>
+
+<!-- ── Chat widget ──────────────────────────────────────────── -->
+<div id="chatWidget">
+  <div class="chat-head">
+    <div class="chat-avatar">F</div>
+    <div>
+      <div class="chat-head-title">Flow Studio London</div>
+      <div class="chat-head-sub"><span class="dot-live"></span> AI Assistant · Always here</div>
+    </div>
+  </div>
+
+  <div id="chatMsgs"></div>
+
+  <div id="quickReplies">
+    <button class="qr" data-msg="View timetable">📅 View timetable</button>
+    <button class="qr" data-msg="Pricing & memberships">💳 Pricing & memberships</button>
+    <button class="qr" data-msg="Beginner classes">🌱 Beginner classes</button>
+    <button class="qr" data-msg="How do I book a class?">✨ Book a class</button>
+  </div>
+
+  <div class="chat-foot">
+    <input id="chatInput" type="text" placeholder="Ask anything…" autocomplete="off">
+    <button id="chatSend" disabled aria-label="Send">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ─── API Configuration ────────────────────────────────────────────────────────
+// For Netlify deployment: set ANTHROPIC_API_KEY in your Netlify environment variables.
+// For local testing: paste your key below (never commit this to git).
+const API_KEY = 'YOUR_API_KEY_HERE';
+
+// Routing: use direct API if a real key is set, otherwise use the Netlify edge function.
+const DIRECT = API_KEY && API_KEY !== 'YOUR_API_KEY_HERE';
+const API_URL = DIRECT
+  ? 'https://api.anthropic.com/v1/messages'
+  : '/api/chat';
+
+// ─── System prompt ────────────────────────────────────────────────────────────
+const SYSTEM = `You are the AI assistant for Flow Studio London, a premium yoga and pilates studio in Shoreditch, East London.
+
+Studio info:
+- Location: Redchurch Street, Shoreditch, East London E2
+- Hours: Monday–Friday 6am–9pm | Saturday–Sunday 8am–6pm
+- Classes: Vinyasa Yoga, Reformer Pilates, Yin Yoga, Meditation
+- All classes are beginner friendly — no experience needed
+- Drop-in: £18 per class
+- Intro offer: £30 for 2 weeks unlimited (new students only)
+- Monthly unlimited membership: £95/month (rolling, cancel anytime)
+- Booking: online via the website or DM on Instagram @flowstudiolondon
+
+Tone: calm, warm, encouraging. Keep replies concise — 2 to 3 sentences usually. Never use bullet points unless listing multiple class times. Always end with a gentle invitation to book or a friendly follow-up question.`;
+
+// ─── State & DOM ──────────────────────────────────────────────────────────────
+const messages  = [];
+let streaming   = false;
+
+const toggle    = document.getElementById('chatToggle');
+const widget    = document.getElementById('chatWidget');
+const msgsEl    = document.getElementById('chatMsgs');
+const qrEl      = document.getElementById('quickReplies');
+const inputEl   = document.getElementById('chatInput');
+const sendBtn   = document.getElementById('chatSend');
+
+// ─── Open / close ─────────────────────────────────────────────────────────────
+toggle.addEventListener('click', () => {
+  const open = widget.classList.toggle('open');
+  toggle.classList.toggle('open', open);
+  if (open && messages.length === 0) {
+    appendBot("Hi! 🌿 Welcome to Flow Studio London. I'm here to help with class info, pricing, schedules — anything you'd like to know. What can I help you with today?");
+    setTimeout(() => inputEl.focus(), 300);
+  }
+});
+
+// ─── Quick replies ────────────────────────────────────────────────────────────
+qrEl.addEventListener('click', e => {
+  const btn = e.target.closest('.qr');
+  if (!btn || streaming) return;
+  qrEl.style.display = 'none';
+  send(btn.dataset.msg);
+});
+
+// ─── Input ────────────────────────────────────────────────────────────────────
+inputEl.addEventListener('input', () => {
+  sendBtn.disabled = !inputEl.value.trim() || streaming;
+});
+inputEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey && !sendBtn.disabled) {
+    e.preventDefault(); send(inputEl.value.trim());
+  }
+});
+sendBtn.addEventListener('click', () => send(inputEl.value.trim()));
+
+// ─── Send message ─────────────────────────────────────────────────────────────
+async function send(text) {
+  if (!text || streaming) return;
+  inputEl.value = '';
+  sendBtn.disabled = true;
+  streaming = true;
+  qrEl.style.display = 'none';
+
+  appendUser(text);
+  messages.push({ role: 'user', content: text });
+
+  const typingEl = appendTyping();
+
+  try {
+    let res;
+
+    if (DIRECT) {
+      // ── Direct Anthropic API (local testing with API_KEY set) ──
+      res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5',
+          max_tokens: 512,
+          stream: true,
+          system: SYSTEM,
+          messages,
+        }),
+      });
+    } else {
+      // ── Netlify edge function (deployed — API key hidden server-side) ──
+      res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages }),
+      });
+    }
+
+    typingEl.remove();
+
+    if (!res.ok) {
+      appendBot("Something went a little wrong — please try again in a moment. 🌿");
+      streaming = false; sendBtn.disabled = false; return;
+    }
+
+    // ── Stream the response ──
+    const bubble = appendStreamBubble();
+    const reader  = res.body.getReader();
+    const dec     = new TextDecoder();
+    let fullText  = '';
+    let buffer    = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += dec.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const chunk = line.slice(6).trim();
+        if (chunk === '[DONE]') continue;
+        try {
+          const j = JSON.parse(chunk);
+          if (j.type === 'content_block_delta' && j.delta?.type === 'text_delta') {
+            fullText += j.delta.text;
+            bubble.innerHTML = esc(fullText);
+            scrollDown();
+          }
+        } catch { /* ignore parse errors in stream */ }
+      }
+    }
+
+    messages.push({ role: 'assistant', content: fullText });
+
+  } catch {
+    typingEl.remove();
+    appendBot("I couldn't connect just now — please check your connection and try again. 🌿");
+  }
+
+  streaming = false;
+  sendBtn.disabled = !inputEl.value.trim();
+  inputEl.focus();
+}
+
+// ─── DOM helpers ──────────────────────────────────────────────────────────────
+function appendUser(text) {
+  const d = document.createElement('div');
+  d.className = 'msg user';
+  d.innerHTML = `<div class="bubble">${esc(text)}</div>`;
+  msgsEl.appendChild(d);
+  scrollDown();
+}
+
+function appendBot(text) {
+  const d = document.createElement('div');
+  d.className = 'msg bot';
+  d.innerHTML = `<div class="bubble">${esc(text)}</div>`;
+  msgsEl.appendChild(d);
+  scrollDown();
+}
+
+function appendStreamBubble() {
+  const d = document.createElement('div');
+  d.className = 'msg bot';
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  d.appendChild(b);
+  msgsEl.appendChild(d);
+  scrollDown();
+  return b;
+}
+
+function appendTyping() {
+  const d = document.createElement('div');
+  d.className = 'typing';
+  d.innerHTML = '<div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>';
+  msgsEl.appendChild(d);
+  scrollDown();
+  return d;
+}
+
+function scrollDown() { msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+function esc(s) {
+  return s
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>');
+}
+</script>
+</body>
+</html>
